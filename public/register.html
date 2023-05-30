@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+      function registerUser() {
+        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        // Perform validation if needed
+        if (username === "" || email === "" || password === "") {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        // Create a data object to be sent to the server
+        var data = {
+          username: username,
+          email: email,
+          password: password
+        };
+
+        // Send a POST request to the server with the user data
+        fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(function(response) {
+          if (response.ok) {
+            return response.text();
+          }
+          throw new Error('Network response was not ok.');
+        })
+        .then(function(responseText) {
+          alert("Registration successful!");
+
+          // Redirect to index.html
+          window.location.href = "index.html";
+        })
+        .catch(function(error) {
+          console.log('Error:', error);
+          alert("An error occurred during registration.");
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h2 class="ECU">ECU</h2>
+      <nav class="navigation">
+        <a href="about.html">ABOUT</a>
+        <button class="btnLogin-popup" onclick="redirectToAnotherPage()">Login</button>
+        <script>
+          function redirectToAnotherPage() {
+            window.location.href = "index.html";
+          }
+        </script>
+      </nav>
+    </header>
+
+    <div class="wrapper">
+      <div class="form-box login">
+        <h2>Registration</h2>
+        <form id="registrationForm">
+          <div class="input-box">
+            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+            <input type="text" id="username" required>
+            <label>Username</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+            <input type="email" id="email" required>
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+            <input type="password" id="password" required>
+            <label>Password</label>
+          </div>
+          <button type="button" class="btn" onclick="registerUser()">Register</button>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

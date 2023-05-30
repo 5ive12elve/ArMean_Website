@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name ="viewport" content="width=device-width, inital-scale=1.0">
+        <title>ArMean</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h2 class="ECU">ECU</h2>
+            <nav class = "navigation">
+                <a href="about.html">ABOUT</a>
+            </nav>
+        </header>
+        <div class="wrapper">
+            <div class="container">
+                <h1>Welcome to ArMean</h1>
+                <p>Please enter the values you want to calculate statistics for:</p>
+                
+                <div>
+                  <label for="values" class="input-label">Values:</label>
+                  <input type="text" id="values" class="input-field" placeholder="Enter values separated by commas">
+                </div>
+                
+                <button class="calculate-button" onclick="calculateStatistics()">Calculate</button>
+                
+                <p class="result">Arithmetic Mean: <span id="meanResult"></span></p>
+                <p class="result">Variance: <span id="varianceResult"></span></p>
+                <p class="result">Standard Deviation: <span id="standardDeviationResult"></span></p>
+              </div>
+        </div>
+
+
+  
+  <script src="script.js"></script>
+</body>
+</html>

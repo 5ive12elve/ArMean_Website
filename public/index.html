@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h2 class="ECU">ECU</h2>
+            <nav class="navigation">
+                <a href="about.html">ABOUT</a>
+                <button class="btnLogin-popup" onclick="redirectToAnotherPage()">Register</button>
+                <script>
+                    function redirectToAnotherPage() {
+                        window.location.href = "register.html";
+                    }
+                </script>
+            </nav>
+        </header>
+
+        <div class="wrapper">
+            <div class="form-box login">
+                <h2>Login</h2>
+                <form action="#">
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                        <input type="email" id="email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                        <input type="password" id="password" required>
+                        <label>Password</label>
+                    </div>    
+                    <button type="button" class="btn" onclick="login()">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script type="text/javascript">
+            function login() {
+                // Get user input from the login form
+                var emailInput = document.getElementById('email').value;
+                var passwordInput = document.getElementById('password').value;
+
+                // Generate the filename based on the email
+                var filename = emailInput + '.json';
+
+                // Fetch the user data file
+                fetch('users_data/' + filename)
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Invalid email');
+                })
+                .then(function(data) {
+                    // Check if the password matches the stored password
+                    if (passwordInput === data.password) {
+                        // Login successful
+                        alert('Login successful!');
+                        window.location.href = 'ArMean.html'; // Redirect to ArMean.html
+                    } else {
+                        // Login failed
+                        alert('Invalid email or password. Please try again.');
+                    }
+                })
+                .catch(function(error) {
+                    console.log('Error:', error);
+                    alert('Invalid email or password. Please try again.');
+                });
+            }
+        </script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    </body>
+</html>
